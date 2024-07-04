@@ -21,10 +21,7 @@ addButton.addEventListener("click", addTask);
 
 // enter키로 입력 
 taskInput.addEventListener("keydown", function(event){
-    if (event.key == "Enter"){
-        console.log("Enter Key Pressed");
-        addTask();
-    }
+    if (event.key == "Enter"){addTask()}
 });
 
 
@@ -34,12 +31,17 @@ for(let i=1;i<tabs.length; i++){
 }
 
 function addTask(){
+    if(!taskInput.value){
+        console.log("입력값이 없음");
+        return
+    };
+
     let task = {
         id: randomIDGenerate(),
         taskContent: taskInput.value,
         isComplete: false,
     }
-    if(!task.taskContent){return};
+    
     taskList.push(task);
     console.log(taskList)
     taskInput.value="";
