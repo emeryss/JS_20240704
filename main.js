@@ -5,8 +5,28 @@ let taskList = [];
 let filterList = [];
 let mode = 'all';
 
+// 메뉴바 underline 코드 (시작)
+let underline = document.getElementById("under-line")
+tabs.forEach(menu=>menu.addEventListener("click", (e)=>indicator(e)))
+
+function indicator(e){
+    underline.style.left = e.currentTarget.offsetLeft + "px";
+    underline.style.width = e.currentTarget.offsetWidth + "px";
+    underline.style.top = e.currentTarget.offsetTop + e.currentTarget.offsetHeight + "px";
+}
+// 메뉴바 underline 코드 (끝)
 
 addButton.addEventListener("click", addTask);
+// taskInput.addEventListener("focus", function(){taskInput.value=""})
+
+// enter키로 입력 
+taskInput.addEventListener("keydown", function(event){
+    if (event.key == "Enter"){
+        console.log("Enter Key Pressed");
+        addTask();
+    }
+});
+
 
 for(let i=1;i<tabs.length; i++){
     tabs[i].addEventListener("click", function(event){filter(event)})
@@ -19,8 +39,10 @@ function addTask(){
         taskContent: taskInput.value,
         isComplete: false,
     }
+    if(!task.taskContent){return};
     taskList.push(task);
     console.log(taskList)
+    taskInput.value="";
     render()
 }
 
