@@ -92,7 +92,7 @@ function toggleComplete(id){
             break;
         }
     }
-    render();
+    filter();
 }
 
 function deleteTask(id){
